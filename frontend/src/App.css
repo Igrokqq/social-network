@@ -1,0 +1,15 @@
+/**
+ ***************************************************************************************
+ * FONTS
+ ***************************************************************************************
+ * I DON'T LOAD FONTS GLOBALLY, THEY LOAD ONLY LOCALLY, WHERE THEY ARE NEEDED
+ * I PREFER TO USE LAZY FONTS LOADING
+ * DON'T LOAD FONTS FROM INTERNET DYNAMICALLY, DOWNLOAD HIM,
+ * PLACE IN /fonts folder AND IMPORT WHERE YOU NEED
+ * @summary find needed for you font in /fonts folder, import him inside your style file
+ */
+
+/**
+ * LIBRARIES STYLES
+ */
+@import '~antd/dist/antd.css';
