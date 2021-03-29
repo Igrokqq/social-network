@@ -3,21 +3,18 @@ import {
   Switch,
   BrowserRouter,
 } from 'react-router-dom';
-import HomeRoutes from './home';
-import AuthRoutes from './auth';
-import NotFoundRoutes from './not-found';
+import HomeRoutes from './home.routes';
+import AuthRoutes from './auth.routes';
+import NotFoundRoutes from './not-found.routes';
+import ProfileRoutes from './profile.routes';
 
-type Props = {
-    state: any; // object,
-    dispatch: any; // function
-    store: any; // store
-}
-export default function Routes(props: Props) {
+export default function Routes(props: any): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
         {HomeRoutes(props).props.children}
-        {AuthRoutes().props.children}
+        {AuthRoutes(props).props.children}
+        {ProfileRoutes(props).props.children}
         {NotFoundRoutes(props).props.children}
       </Switch>
     </BrowserRouter>

@@ -163,9 +163,21 @@
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-react": "^7.22.0",
+    "module-alias": "^2.2.2",
     "ts-loader": "^8.0.17",
     "webpack": "^4.44.2",
     "webpack-cli": "^4.5.0"
+  },
+  "_moduleAliases": {
+    "@shared/*": [
+      "./src/shared/*"
+    ],
+    "@sass/*": [
+      "./src/sass/*"
+    ],
+    "@components/*": [
+      "./src/components"
+    ]
   },
   "babel": {
     "presets": [

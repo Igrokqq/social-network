@@ -38,6 +38,7 @@ module.exports = {
     indent: ['error', 2, {
       SwitchCase: 1,
     }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-unused-vars': 'off',
     'func-names': ['off'],
     '@typescript-eslint/no-unused-vars': ['error'],

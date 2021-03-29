@@ -4,6 +4,7 @@ import { UserSchema } from './schemas/users.schema';
 import constants from './users.constants';
 import UsersService from './users.service';
 import UsersRepository from './users.repository';
+import UsersController from './users.controller';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import UsersRepository from './users.repository';
       schema: UserSchema,
     }]),
   ],
-  controllers: [],
+  controllers: [UsersController],
   providers: [UsersService, UsersRepository],
   exports: [UsersService, UsersRepository],
 })

@@ -10,6 +10,7 @@ import {
   NotFoundException,
   ForbiddenException,
   HttpStatus,
+  Get,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -21,6 +22,7 @@ import {
   ApiBadRequestResponse,
   ApiConflictResponse,
   ApiNoContentResponse,
+  ApiForbiddenResponse,
 } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import UsersService from '@components/users/users.service';
@@ -241,5 +243,55 @@ export default class AuthController {
     }
 
     return {};
+  }
+
+  @ApiOkResponse({
+    type: Boolean,
+  })
+  @ApiForbiddenResponse({
+    type: 'object',
+    description: 'Incorrect token',
+  })
+  @ApiUnauthorizedResponse({
+    schema: {
+      type: 'object',
+      example: {
+        message: 'string',
+      },
+    },
+    description: 'Token has been expired',
+  })
+  @Post('access-token/:token/validate')
+  public async checkJwtAccessToken(@Param('token') accessToken: string): Promise<boolean | never> {
+    const decodedUser: DecodedUser | null = await this.authService.verifyToken(
+      accessToken,
+      process.env.JWT_ACCESS_TOKEN_SECRET || '',
+    );
+
+    if (!decodedUser) {
+      throw new ForbiddenException('Incorrect token');
+    }
+
+    return true;
+  }
+
+  @Get('access-token/:accessToken/user')
+  public async getUserByJwtAccessToken(@Param('accessToken') accessToken: string): Promise<UserEntity | never> {
+    const decodedUser: DecodedUser | null = await this.authService.verifyToken(
+      accessToken,
+      process.env.JWT_ACCESS_TOKEN_SECRET || '',
+    );
+
+    if (!decodedUser) {
+      throw new ForbiddenException('Incorrect token');
+    }
+
+    const user: UserEntity | null = await this.usersService.getById(decodedUser.id);
+
+    if (!user) {
+      throw new NotFoundException('User does not exist');
+    }
+
+    return user;
   }
 }
