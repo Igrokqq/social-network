@@ -5,8 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Redis } from 'ioredis';
 import AuthModule from '@components/auth/auth.module';
-import CurrenciesModule from '@components/currencies/currencies.module';
 import UsersModule from '@components/users/users.module';
+import FriendsModule from '@components/users/friends/friends.module';
 import AppController from './app.controller';
 import AppService from './app.service';
 
@@ -66,7 +66,7 @@ import AppService from './app.service';
     }),
     AuthModule,
     UsersModule,
-    CurrenciesModule,
+    FriendsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

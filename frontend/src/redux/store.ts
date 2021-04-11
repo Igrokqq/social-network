@@ -7,7 +7,7 @@ import {
   composeWithDevTools
 } from 'redux-devtools-extension';
 
-import authReducer from './auth.reducer';
+import authReducer from './Auth';
 
 const reducers = combineReducers({
   authReducer

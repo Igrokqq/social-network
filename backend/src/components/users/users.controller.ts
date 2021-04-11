@@ -3,6 +3,7 @@ import {
   Controller,
   Param,
   Put,
+  Delete,
 } from '@nestjs/common';
 import ObjectIdPipe from '@pipes/object-id.pipe';
 import { ObjectID } from 'mongodb';
@@ -20,5 +21,10 @@ export default class UsersController {
     @Body() payload: UpdateUserDto,
   ): Promise<UpdateResponse> {
     return this.usersService.updateOne(userId, payload);
+  }
+
+  @Delete(':userId')
+  public closeAccount(@Param('userId', ObjectIdPipe) userId: ObjectID): Promise<void> {
+    return this.usersService.deleteOne(userId);
   }
 }

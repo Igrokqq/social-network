@@ -38,7 +38,7 @@ import SignUpDto from './dto/sign-up.dto';
 import JwtTokensDto from './dto/jwt-tokens.dto';
 
 @ApiTags('Auth')
-@Controller()
+@Controller('auth')
 export default class AuthController {
   constructor(
     private readonly authService: AuthService,

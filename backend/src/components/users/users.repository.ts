@@ -37,4 +37,10 @@ export default class UsersRepository {
       $set: payload,
     }).exec();
   }
+
+  public async deleteOne(userId: ObjectID): Promise<void> {
+    this.usersModel.deleteOne({
+      _id: userId,
+    }).exec();
+  }
 }

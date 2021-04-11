@@ -22,7 +22,7 @@ export default class AllExceptionsFilter implements ExceptionFilter {
     if (exception.code === mongodbCodes.bulkWriteError) {
       return res.status(HttpStatus.CONFLICT).json({
         message: exception.message,
-        error: exception.name,
+        name: exception.name,
       });
     }
 
@@ -30,7 +30,7 @@ export default class AllExceptionsFilter implements ExceptionFilter {
 
     return res.status(status).json({
       message: response ? response.message : exception.message,
-      error: response ? response.error : exception.name,
+      name: response ? response.error : exception.name,
     });
   }
 }

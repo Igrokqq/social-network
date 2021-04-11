@@ -28,4 +28,8 @@ export default class UsersService {
   public updateOne(userId: ObjectID, payload: UpdateUserDto): Promise<UpdateResponse> {
     return this.usersRepository.updateOne(userId, payload);
   }
+
+  public deleteOne(userId: ObjectID): Promise<void> {
+    return this.usersRepository.deleteOne(userId);
+  }
 }

@@ -1,0 +1,30 @@
+@import '../_globals'
+
+.header
+	padding-left: 6rem
+	.navigation
+		margin-top: 1.2rem
+		.navigation-link
+			position: relative
+			right: 12px
+			padding-left: 0
+			transition-property: background-color, box-shadow
+			transition-duration: .2s
+			border-radius: 9999px
+			&:hover
+				color: $twitter-blue
+				background-color: $twitter-hover-blue
+			.link
+				display: flex
+				justify-content: flex-start
+				align-items: center
+				padding: 12px
+				.icon
+					width: 26px
+				.text
+					margin-right: 16px
+					margin-left: 20px
+					color: $twitter-black
+					font: 14px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif
+					overflow-wrap: break-word
+					font-size: 20px
