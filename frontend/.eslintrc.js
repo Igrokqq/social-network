@@ -34,16 +34,14 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
-    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
     indent: ['error', 2, {
       SwitchCase: 1,
     }],
-    'no-empty-function': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-unused-vars': 'off',
     'func-names': ['off'],
-    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
     'no-debugger': 'off',
     'no-var': 'error',
     'no-underscore-dangle': 'off',

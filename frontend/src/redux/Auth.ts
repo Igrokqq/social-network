@@ -1,5 +1,6 @@
 import AuthHelper from '../helpers/Auth';
 import { User } from '../components/SignUpForm';
+import { UserEntity } from '../api/User';
 import { CustomAction } from './types';
 import { SignInResponse } from '../api/Auth';
 
@@ -13,7 +14,7 @@ type State = {
   accessToken: string;
   refreshToken: string;
   isAuthenticated: boolean;
-  user: User | null;
+  user: UserEntity | null;
 }
 const _getActualState = (helper: typeof AuthHelper): State => {
   const accessToken: string = helper.getJwtAccessToken() || '';

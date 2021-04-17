@@ -1,14 +1,8 @@
-import React, { Fragment } from 'react';
-import Container from 'react-bootstrap/Container';
-import Header from '../layouts/HomeHeader';
+import React from 'react';
+import HomeLayout from '../layouts/Home';
 
 export default function HomePage(): JSX.Element {
   return (
-    <Fragment>
-      <Container className="d-flex" fluid>
-        <Header />
-        <main>Content</main>
-      </Container>
-    </Fragment>
+    <HomeLayout>Content</HomeLayout>
   );
 }

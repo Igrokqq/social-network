@@ -1,0 +1,14 @@
+@import '../_globals'
+
+.add-photo
+	border-radius: 9999px
+	transition-property: background-color, box-shadow
+	transition-duration: .2s
+	min-width: 40px
+	min-height: 40px
+	height: 40px
+	width: 40px
+	&:hover
+		background-color: $twitter-hover-white
+	&.disabled
+		pointer-events: none

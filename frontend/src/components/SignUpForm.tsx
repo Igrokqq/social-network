@@ -6,20 +6,21 @@ import SignUpFormStep2 from './SignUpFormStep2';
 import SignUpFormStep3 from './SignUpFormStep3';
 
 export type User = {
-  login: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  phone: string;
-  email: string;
+  readonly login: string;
+  readonly password: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly gender: string;
+  readonly phone: string;
+  readonly email: string;
 };
 
 type Props = {
-  onSubmit: (user: User) => void;
+  readonly className?: string;
+  readonly onSubmit: (user: User) => void;
 };
 
-export default function SignUpForm({ onSubmit }: Props): JSX.Element {
+export default function SignUpForm({ onSubmit, className }: Props): JSX.Element {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [state, setState] = useState<User>({
     login: '',
@@ -42,7 +43,7 @@ export default function SignUpForm({ onSubmit }: Props): JSX.Element {
   };
 
   return (
-    <Form onSubmit={_onSubmit}>
+    <Form className={className || ''} onSubmit={_onSubmit}>
       <PrevNextStepper position={PrevNextStepperPositions.TOP} steps={[
         <SignUpFormStep1
           key="0"

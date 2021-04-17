@@ -4,13 +4,16 @@ import {
   Param,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import ObjectIdPipe from '@pipes/object-id.pipe';
 import { ObjectID } from 'mongodb';
 import { UpdateResponse } from '@interfaces/update-response.interface';
+import JwtAccessGuard from '@guards/jwt-access.guard';
 import UsersService from './users.service';
 import UpdateUserDto from './dto/update.dto';
 
+@UseGuards(JwtAccessGuard)
 @Controller('users')
 export default class UsersController {
   constructor(private readonly usersService: UsersService) {}

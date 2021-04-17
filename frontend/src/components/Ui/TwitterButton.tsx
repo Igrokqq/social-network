@@ -10,7 +10,7 @@ export enum Themes {
 
 type Props = {
   text: string;
-  onClick?: (event: MouseEvent<any>) => void;
+  onClick?: (event: MouseEvent<unknown>) => void;
   isDisabled?: boolean;
   className?: string;
   theme?: Themes;

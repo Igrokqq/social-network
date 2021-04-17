@@ -1,0 +1,51 @@
+@import "../../_globals"
+
+.twitter-modal
+	position: absolute
+	padding-top: 1%
+	display: none
+	left: calc(50% - 300px)
+	&:before
+		content: ""
+		display: none
+		background: rgba(0, 0, 0, 0.6)
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		z-index: 10
+	&.active:before
+		display: block
+		transform: translate(0, 0)
+	&.active
+		display: block
+	&-dialog
+		position: absolute
+		display: flex
+		flex-direction: column
+		background-color: $twitter-white
+		z-index: 9999
+		min-height: 400px
+		min-width: 600px
+		overflow: hidden
+		flex-shrink: 1
+		border-radius: 16px
+		flex-basis: auto
+		max-width: 80vw
+		&-header
+			height: 53px
+			.title
+				.text
+					font-size: 20px
+					font-weight: 800
+			.saveButton
+				min-width: calc(51.52px)
+				min-height: 32px
+				height: 32px
+				width: 68px
+				padding-left: 1em
+				padding-right: 1em
+		&-content
+			max-height: 600px
+			overflow-y: auto

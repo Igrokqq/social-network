@@ -65,6 +65,7 @@ export default function LoginInput({
         placeholder={placeholderText || initialProps.placeholderText}
         isInvalid={!!validationError}
         value={value || ''}
+        name="login"
       />
       <Form.Control.Feedback type="invalid">
         {validationError && validationError.errors.join()}

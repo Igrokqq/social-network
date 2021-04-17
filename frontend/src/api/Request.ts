@@ -34,3 +34,20 @@ export const post = async function (url: string, options: RequestInit = {}): Pro
 
   return Promise.reject(response);
 };
+
+export const put = async function (url: string, options: RequestInit = {}): Promise<unknown> {
+  const response: Response = await fetch(`${REACT_APP_SERVER_BASE_URL}/${url}`, {
+    ...options,
+    headers: {
+      ...initialHeaders,
+      ...options.headers,
+    },
+    method: 'PUT'
+  });
+
+  if (response.ok) {
+    return response.json();
+  }
+
+  return Promise.reject(response);
+};

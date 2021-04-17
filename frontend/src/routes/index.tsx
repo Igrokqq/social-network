@@ -11,6 +11,7 @@ import HomePage from '../pages/Home';
 import Auth from '../pages/Auth';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
+import Profile from '../pages/Profile';
 import NotFoundPage from '../pages/NotFound';
 import { ComponentReduxProps } from '../redux/types';
 
@@ -48,37 +49,13 @@ export default function Routes({ store, dispatch }: ComponentReduxProps): JSX.El
           redirectTo={RoutesConstants.HOME.INDEX}
           isAuthenticated={isAuthenticated}
         />
-        {/* <RedirectIfAuthenticated
+        <RedirectIfUnauthenticated
           exact
-          path={RoutesConstants.AUTH.SIGN_UP}
-          isAuthenticated={isAuthenticated}
-          redirectTo="/profile"
-          render={() => <SignUpPage />}
-        />
-        <RedirectIfAuthenticated
-          exact
-          path={RoutesConstants.AUTH.SIGN_IN}
-          isAuthenticated={isAuthenticated}
-          redirectTo="/profile"
-          render={() => <SignInPage />}
-        /> */}
-        {/* PROFILE */}
-        {/* <RedirectIfUnauthenticated
-          exact
-          isAuthenticated={isAuthenticated}
           path={RoutesConstants.PROFILE.INDEX}
-          render={() => <ProfilePage store={store} dispatch={dispatch} />}
+          render={() => <Profile store={store} dispatch={dispatch} />}
           redirectTo={RoutesConstants.AUTH.SIGN_IN}
-        /> */}
-        {/* FRIENDS */}
-        {/* <RedirectIfUnauthenticated
-          exact
           isAuthenticated={isAuthenticated}
-          path={RoutesConstants.FRIENDS.INDEX}
-          render={() => <FriendsPage dispatch={dispatch} store={store} />}
-          redirectTo={RoutesConstants.AUTH.SIGN_IN}
-        /> */}
-        {/* NOT_FOUND */}
+        />
         <Route exact path="*" component={NotFoundPage} />
       </Switch>
     </BrowserRouter>

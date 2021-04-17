@@ -1,0 +1,30 @@
+@import "../../_globals"
+
+.avatar
+	width: 134px
+	height: 134px
+	outline-style: none
+	&:hover
+		.add-photo
+			.add-photo-icon
+				opacity: 1
+	.img
+		background-image: url('../../../assets/images/profile/default-avatar-img.png')
+		background-size: contain
+		background-position: center
+		background-repeat: no-repeat
+		width: 100%
+		height: 100%
+		cursor: pointer
+		border-radius: 9999px
+		transition-property: background-color, box-shadow, filter
+		transition-duration: .5s
+		&:hover
+			background-color: $twitter-avatar-hover-background-color
+			box-shadow: $twitter-avatar-box-shadow
+			filter: brightness(.7)
+	.add-photo
+		.add-photo-icon
+			transition-property: opacity
+			transition-duration: .5s
+			opacity: 0
