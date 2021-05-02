@@ -8,6 +8,12 @@ export default {
   },
   USER: {
     _NAMESPACE: (): string => 'users',
-    UPDATE_ONE: (userId: string): string => `${userId}`
+    UPDATE_ONE: (userId: string): string => `${userId}`,
+    GET_ALL_WITH_PAGINATION_BY_SEARCH_TEXT: (searchText: string): string => `search/${searchText}`
+  },
+  POST: {
+    _NAMESPACE: (): string => 'posts',
+    CREATE: (): string => '',
+    USER_POSTS: (userId: string): string => `${userId}`
   }
 };

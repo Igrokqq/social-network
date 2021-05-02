@@ -43,4 +43,26 @@ export default class UsersRepository {
       _id: userId,
     }).exec();
   }
+
+  public getAllWithPaginationBySearchText(searchText: string): Promise<UserEntity[]> {
+    const regularExpression: RegExp = new RegExp(searchText, 'gi');
+
+    return this.usersModel.find({
+      $or: [
+        {
+          firstName: regularExpression,
+        },
+        {
+          lastName: regularExpression,
+        },
+        {
+          email: regularExpression,
+        },
+      ],
+    }, {
+      _id: 1,
+      firstName: 1,
+      lastName: 1,
+    }).lean().exec();
+  }
 }

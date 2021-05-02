@@ -4,6 +4,7 @@ import {
   BrowserRouter,
   Route
 } from 'react-router-dom';
+// import { Socket } from 'socket.io-client';
 import RedirectIfUnauthenticated from './middlewares/redirect-if-unauthenticated.middleware';
 import RedirectIfAuthenticated from './middlewares/redirect-if-authenticated.middleware';
 import RoutesConstants from './constants';
@@ -12,10 +13,15 @@ import Auth from '../pages/Auth';
 import SignUp from '../pages/SignUp';
 import SignIn from '../pages/SignIn';
 import Profile from '../pages/Profile';
+import Messages from '../pages/Messages';
 import NotFoundPage from '../pages/NotFound';
 import { ComponentReduxProps } from '../redux/types';
+import MessagesDirect from '../pages/MessagesDirect';
 
-export default function Routes({ store, dispatch }: ComponentReduxProps): JSX.Element {
+export type PageComponentProps = ComponentReduxProps & {
+  readonly socket: any;
+}
+export default function Routes({ store, dispatch, socket }: PageComponentProps): JSX.Element {
   const { isAuthenticated } = store.getState().authReducer;
 
   return (
@@ -53,6 +59,20 @@ export default function Routes({ store, dispatch }: ComponentReduxProps): JSX.El
           exact
           path={RoutesConstants.PROFILE.INDEX}
           render={() => <Profile store={store} dispatch={dispatch} />}
+          redirectTo={RoutesConstants.AUTH.SIGN_IN}
+          isAuthenticated={isAuthenticated}
+        />
+        <RedirectIfUnauthenticated
+          exact
+          path={RoutesConstants.MESSAGES.INDEX}
+          render={() => <Messages store={store} dispatch={dispatch} />}
+          redirectTo={RoutesConstants.AUTH.SIGN_IN}
+          isAuthenticated={isAuthenticated}
+        />
+        <RedirectIfUnauthenticated
+          exact
+          path={RoutesConstants.MESSAGES.DIRECT_PATH}
+          render={() => <MessagesDirect dispatch={dispatch} store={store} socket={socket} />}
           redirectTo={RoutesConstants.AUTH.SIGN_IN}
           isAuthenticated={isAuthenticated}
         />

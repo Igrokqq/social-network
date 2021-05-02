@@ -7,8 +7,11 @@ import { Redis } from 'ioredis';
 import AuthModule from '@components/auth/auth.module';
 import UsersModule from '@components/users/users.module';
 import FriendsModule from '@components/users/friends/friends.module';
+import MessagesModule from '@components/messages/messages.module';
+import PostsModule from '@components/posts/posts.module';
 import AppController from './app.controller';
 import AppService from './app.service';
+import AppGateway from './app.gateway';
 
 @Module({
   imports: [
@@ -58,7 +61,7 @@ import AppService from './app.service';
           console.log('attempt to restart the redis server');
         });
       },
-      reconnectOnError: (error: Error) => {
+      reconnectOnError: (error: Error): boolean => {
         console.error(error);
 
         return true;
@@ -67,8 +70,10 @@ import AppService from './app.service';
     AuthModule,
     UsersModule,
     FriendsModule,
+    MessagesModule,
+    PostsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AppGateway],
 })
 export default class AppModule {}

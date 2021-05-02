@@ -8,9 +8,11 @@ import HomeActiveIcon from './Ui/HomeActiveIcon';
 import HashTagIcon from './Ui/HashTagIcon';
 import BellIcon from './Ui/BellIcon';
 import MessageIcon from './Ui/MessageIcon';
+import MessageActiveIcon from './Ui/MessageActiveIcon';
 import ProfileIcon from './Ui/ProfileIcon';
 import ProfileActiveIcon from './Ui/ProfileActiveIcon';
 import RoutesConstants from '../routes/constants';
+import AuthHelper from '../helpers/Auth';
 
 import '../sass/components/HomeHeaderNavigationPanel.sass';
 
@@ -30,6 +32,11 @@ export default function HomeHeaderNavigationPanel(): JSX.Element {
       stopHistoryListening();
     };
   }, []);
+
+  const _onLogout = (): void => {
+    AuthHelper.logout();
+    window.location.href = RoutesConstants.AUTH.SIGN_IN;
+  };
 
   return (
     <Nav
@@ -61,9 +68,12 @@ export default function HomeHeaderNavigationPanel(): JSX.Element {
           <span className="text d-none d-sm-none d-md-inline">Notifications</span>
         </Nav.Link>
       </div>
-      <div className="navigation-link mb-2">
-        <Nav.Link eventKey="link-3" className="link">
-          <MessageIcon className="icon" />
+      <div className={`navigation-link mb-2 ${currentTab === RoutesConstants.MESSAGES.INDEX ? 'active' : ''}`}>
+        <Nav.Link as={Link} to={RoutesConstants.MESSAGES.INDEX} className="link">
+          {currentTab === RoutesConstants.MESSAGES.INDEX
+            ? <MessageActiveIcon className="icon" />
+            : <MessageIcon className="icon" />
+          }
           <span className="text d-none d-sm-none d-md-inline">Messages</span>
         </Nav.Link>
       </div>
@@ -74,6 +84,11 @@ export default function HomeHeaderNavigationPanel(): JSX.Element {
             : <ProfileIcon className="icon" />
           }
           <span className="text d-none d-sm-none d-md-inline">Profile</span>
+        </Nav.Link>
+      </div>
+      <div className="navigation-link mb-2">
+        <Nav.Link className="link" onClick={_onLogout}>
+          <span className="text d-none d-sm-none d-md-inline">Logout</span>
         </Nav.Link>
       </div>
     </Nav>

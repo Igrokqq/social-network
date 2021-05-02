@@ -32,4 +32,8 @@ export default class UsersService {
   public deleteOne(userId: ObjectID): Promise<void> {
     return this.usersRepository.deleteOne(userId);
   }
+
+  public getAllWithPaginationBySearchText(searchText: string): Promise<UserEntity[]> {
+    return this.usersRepository.getAllWithPaginationBySearchText(searchText);
+  }
 }

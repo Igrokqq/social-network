@@ -11,23 +11,27 @@ import AuthHelper from '../helpers/Auth';
 import HttpRequestFilter from '../api/HttpRequestFilter';
 
 import '../sass/components/ProfileEditModal.sass';
+import { UpdateResponse } from '../api/types';
 
 type Props = Omit<TwitterModalProps, 'header' | 'content'> & {
   readonly onClose: () => void;
   readonly user: UserEntity;
+  readonly onEdit: (user: UserEntity) => void;
 };
 
-export default function ProfileEditModal({ onClose, isActive, user }: Props): JSX.Element {
+export default function ProfileEditModal({
+  onClose,
+  isActive,
+  user,
+  onEdit
+}: Props): JSX.Element {
   const [editFormReference, setEditFormReference] = useState<HTMLFormElement | null>(null);
   const [isSaveButtonDisabled, setIsSaveButtonDisabled] = useState<boolean>(false);
 
   const _onProfileEditSubmit = async function (user: UserEntity): Promise<void> {
-    const tryFn = async (): Promise<void> => {
-      await UserHelper.updateOne(AuthHelper.getJwtAccessToken() || '', user);
-      onClose();
-    };
-
-    await HttpRequestFilter.tryCatch(tryFn);
+    await HttpRequestFilter.tryCatch((): Promise<UpdateResponse> => UserHelper.updateOne(AuthHelper.getJwtAccessToken() || '', user));
+    onEdit(AuthHelper.getUser() as UserEntity);
+    onClose();
   };
   const _triggerEditFormSubmit = (form: HTMLFormElement): void => {
     form.requestSubmit();

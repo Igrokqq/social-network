@@ -2,7 +2,7 @@ import { Strategy } from 'passport-local';
 import { validate, ValidationError } from 'class-validator';
 import { Request as ExpressRequest } from 'express';
 import { PassportStrategy } from '@nestjs/passport';
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import SignInDto from '../dto/sign-in.dto';
 import { ValidateUserOutput } from '../interfaces/validate-user-output.interface';
 import AuthService from '../auth.service';
@@ -27,7 +27,7 @@ export default class LocalStrategy extends PassportStrategy(Strategy) {
     const user: ValidateUserOutput | null = await this.authService.validateUser(email, password);
 
     if (!user) {
-      throw new UnauthorizedException('Check email or password.');
+      throw new BadRequestException('Check email or password.');
     }
 
     return user;

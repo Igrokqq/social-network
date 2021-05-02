@@ -30,10 +30,10 @@ module.exports = {
     ],
     'import/extensions': 'off',
     'no-empty-function': 'off',
-    indent: [
-      'error',
-      2,
-    ],
+    indent: ['error', 2, {
+      SwitchCase: 1,
+    }],
+    'no-tabs': 'error',
     'arrow-body-style': 'off',
     'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',

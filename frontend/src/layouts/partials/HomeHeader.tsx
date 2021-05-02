@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import HomeHeaderNavigationPanel from '../../components/HomeHeaderNavigationPanel';
+import HomeHeaderNavigationPanel from '../../components/HomeHeaderNavPanel';
 
 import '../../sass/layouts/HomeHeader.sass';
 

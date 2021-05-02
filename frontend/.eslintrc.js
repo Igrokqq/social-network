@@ -63,6 +63,8 @@ module.exports = {
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'class-methods-use-this': 'off',
+    'consistent-return': 'off',
+    'react/prop-types': 'off'
   },
   overrides: [
     {

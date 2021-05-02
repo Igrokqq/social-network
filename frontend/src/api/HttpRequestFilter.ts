@@ -1,32 +1,30 @@
 import { StatusCodes } from 'http-status-codes';
 import AuthHelper from '../helpers/Auth';
 
-const _defaultCatch = async ({ status }: Response, tryFn: () => Promise<void> | void): Promise<void> => {
+const _defaultCatch = async function ({ status }: Response, tryFn: () => Promise<void> | void): Promise<void> {
   if (status === StatusCodes.UNAUTHORIZED) {
     try {
       await AuthHelper.loginWithRefreshToken(AuthHelper.getJwtRefreshToken() || '');
-      await tryFn();
+
+      return tryFn();
     } catch (error) {
       console.error(error);
-      AuthHelper.logout();
+      return AuthHelper.logout();
     }
   }
 };
 
 export default {
   async tryCatch(
-    tryFn: () => Promise<void> | void,
+    tryFn: () => Promise<any> | any,
     catchFn?: (error: unknown) => Promise<void> | void
-  ): Promise<void> {
+  ): Promise<any> {
     try {
-      await tryFn();
-    } catch (error) {
-      if (catchFn) {
-        await catchFn(error);
-        return;
-      }
+      const result = await tryFn();
 
-      await _defaultCatch(error, tryFn);
+      return result;
+    } catch (error) {
+      return catchFn ? catchFn(error) : _defaultCatch(error, tryFn);
     }
   }
 };

@@ -6,6 +6,8 @@ const initialHeaders: {[key: string]: string} = {
   'Content-Type': 'application/json'
 };
 
+const isSuccessStatusCode = (status: number): boolean => status >= 200 && status < 300;
+
 export const get = async function (url: string, options: RequestInit = {}): Promise<unknown> {
   const response: Response = await fetch(`${REACT_APP_SERVER_BASE_URL}/${url}`, {
     ...options,
@@ -15,7 +17,11 @@ export const get = async function (url: string, options: RequestInit = {}): Prom
     }
   });
 
-  return response.json();
+  if (response.ok && isSuccessStatusCode(response.status)) {
+    return response.json();
+  }
+
+  return Promise.reject(response);
 };
 
 export const post = async function (url: string, options: RequestInit = {}): Promise<unknown> {

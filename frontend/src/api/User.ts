@@ -1,4 +1,4 @@
-import { put } from './Request';
+import { put, get } from './Request';
 import ENDPOINTS from './endpoints';
 import { UpdateResponse } from '../api/types';
 
@@ -34,4 +34,13 @@ export default {
       }
     }) as Promise<UpdateResponse>;
   },
+  getAllWithPaginationBySearchText(accessToken: string, searchString: string): Promise<UserEntity[]> {
+    return get(
+      `${ENDPOINTS.USER._NAMESPACE()}/${ENDPOINTS.USER.GET_ALL_WITH_PAGINATION_BY_SEARCH_TEXT(searchString)}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      }
+    ) as Promise<UserEntity[]>;
+  }
 };

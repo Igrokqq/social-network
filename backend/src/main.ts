@@ -3,12 +3,14 @@ import 'module-alias/register';
 import { NestFactory } from '@nestjs/core';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import RedisIoAdapter from '@adapters/redis-io.adapter';
 import AppModule from './components/app/app.module';
 import AppService from './components/app/app.service';
 import AllExceptionsFilter from './filters/all-exceptions.filter';
 
 async function bootstrap(): Promise<void> {
-  const app: INestApplication = await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(AppModule, { cors: true });
+  app.useWebSocketAdapter(new RedisIoAdapter(app));
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useGlobalFilters(new AllExceptionsFilter());
   app.enableCors({

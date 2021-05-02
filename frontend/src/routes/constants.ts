@@ -10,10 +10,9 @@ export default {
   HOME: {
     INDEX: '/'
   },
-  USER_FAREWELL: {
-    INDEX: '/bye'
-  },
-  FRIENDS: {
-    INDEX: '/friends'
+  MESSAGES: {
+    INDEX: '/messages',
+    DIRECT: (toUserId: string): string => `/messages/${toUserId}`,
+    DIRECT_PATH: '/messages/:userId'
   }
 };

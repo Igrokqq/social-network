@@ -1,0 +1,26 @@
+@import '../../_globals'
+
+.input-group
+	position: relative
+	border: 0!important
+	outline: none!important
+	.icon-wrapper
+		display: flex
+		align-items: center
+		justify-content: flex-start
+		.icon
+			position: absolute
+			top: 4px
+			padding-left: 12px
+			z-index: 9999
+	.twitter-search-input
+		height: 45px!important
+		border-radius: 9999px!important
+		background-color: $twitter-search-input-bg!important
+		padding: 12px!important
+		padding-left: 48px!important
+		&:focus
+			background-color: $twitter-white!important
+			border-color: $twitter-blue
+			box-shadow: none
+			outline: none

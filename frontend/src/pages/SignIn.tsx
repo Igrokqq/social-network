@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { SignInResponse } from '../api/Auth';
 import AuthLayout from '../layouts/Auth';
 import AuthHelper from '../helpers/Auth';
@@ -12,7 +11,6 @@ import TwitterLink from '../components/Ui/TwitterLink';
 
 export default function SignIn({ dispatch }: ComponentReduxProps): JSX.Element {
   const [error, setErrorMessage] = useState<Error | null>(null);
-  const { push: historyPush } = useHistory();
 
   const _onSubmit = async (user: SignInFields): Promise<void> => {
     try {
@@ -22,7 +20,7 @@ export default function SignIn({ dispatch }: ComponentReduxProps): JSX.Element {
         type: AUTH_ACTIONS.LOGIN,
         payload: tokens
       });
-      historyPush(RoutesConstants.PROFILE.INDEX);
+      window.location.href = RoutesConstants.PROFILE.INDEX;
     } catch (error) {
       setErrorMessage(await error.json() as Error);
     }

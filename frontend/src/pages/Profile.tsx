@@ -8,15 +8,15 @@ import ProfileContent from '../components/ProfileContent';
 
 import '../sass/pages/Profile.sass';
 
-export default function Profile({ store }: ComponentReduxProps): JSX.Element {
-  const [user] = useState<UserEntity>(store.getState().authReducer.user);
+export default function Profile({ store, dispatch }: ComponentReduxProps): JSX.Element {
+  const [user, setUser] = useState<UserEntity>(store.getState().authReducer.user);
 
   return (
     <HomeLayout>
       <div className="profile">
         <ProfileNavigationBar />
         <ProfileThemeBlock />
-        <ProfileContent user={user} />
+        <ProfileContent user={user} setUser={setUser} dispatch={dispatch} />
       </div>
     </HomeLayout>
   );
